@@ -1,0 +1,69 @@
+server:
+  port: 52161
+  servlet:
+    context-path: /api/ #api根路径
+
+spring:
+
+  datasource: #数据库源
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://172.30.140.231/postgres
+      username: postgres
+      password: 123456
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+
+  jpa: #jpa数据操作
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    show-sql: true
+    database: postgresql
+    properties:
+      hibernate:
+        dialect:  org.hibernate.dialect.PostgreSQL9Dialect
+        temp:
+          use_jdbc_metadata_defaults: false
+
+
+
+
+#  redis: #redis 缓存设置
+#    database: 0
+#    host: localhost #缓存服务器
+#    port: 6379 #缓存服务器端口
+
+  rabbitmq:
+   host: 172.30.140.231
+   port: 5672
+   username: giser
+   password: 123456
+
+
+#jwt
+jwt:
+  header: Authorization
+  secret: wndfer
+  expiration: 604800
+  tokenHead: "Bearer "
+
+#logging
+logging: #与日志相关的设置
+  file: springboot.log #日志文件路径，可以设置全路径
+  level:
+    org:
+      mybatis: TRACE
+      springframework: INFO
+    leix:
+      lebean:
+        sweb: TRACE
+
+#swagger
+swagger: #与swagger相关的设置
+  title: RESTful API #api文档标题
+  description: 项目API文档 #api文档说明
+  version: 1.0 #api版本
+  basePackage: com.ssii #api基础包名
